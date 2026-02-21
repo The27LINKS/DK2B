@@ -1,0 +1,380 @@
+/* ============================================================================ */
+/* DK2B INTELLIGENCE ENGINE — HACKATHON-LEVEL PREMIUM STYLES                   */
+/* ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ==================== 1. BASE ==================== */
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: #05080f;
+    color: #cbd5e1;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==================== 2. GLASSMORPHISM ==================== */
+.glass {
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass-strong {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ==================== 3. GRADIENT TEXT ==================== */
+.gradient-text-animated {
+    background: linear-gradient(135deg, #818cf8, #c084fc, #818cf8);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ==================== 4. TECH BADGES ==================== */
+.tech-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(99, 102, 241, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+/* ==================== 5. CUSTOM SCROLLBARS ==================== */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 100px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.4);
+}
+
+/* ==================== 6. MERMAID DIAGRAMS ==================== */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.mermaid text {
+    fill: #cbd5e1 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon {
+    stroke: #6366f1 !important;
+    fill: rgba(30, 41, 59, 0.8) !important;
+    stroke-width: 2px !important;
+    rx: 8 !important;
+    ry: 8 !important;
+}
+
+.mermaid .edgePath .path {
+    stroke: rgba(99, 102, 241, 0.5) !important;
+    stroke-width: 2px !important;
+}
+
+.mermaid .marker {
+    fill: rgba(99, 102, 241, 0.5) !important;
+    stroke: rgba(99, 102, 241, 0.5) !important;
+}
+
+/* ==================== 7. TOGGLE SWITCH ==================== */
+.toggle-checkbox {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(0);
+}
+
+.toggle-checkbox:checked {
+    transform: translateX(100%);
+    border-color: #6366f1;
+}
+
+.toggle-checkbox:checked+.toggle-label {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+}
+
+/* ==================== 8. REQUIREMENT CARDS ==================== */
+.requirement-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.requirement-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #6366f1, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.requirement-card:hover {
+    transform: translateY(-2px) translateX(2px);
+    border-color: rgba(99, 102, 241, 0.2) !important;
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+    background: rgba(30, 41, 59, 0.5) !important;
+}
+
+.requirement-card:hover::before {
+    opacity: 1;
+}
+
+/* Priority badges */
+.priority-high {
+    background: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.priority-medium {
+    background: rgba(245, 158, 11, 0.1);
+    color: #fcd34d;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.priority-low {
+    background: rgba(34, 197, 94, 0.1);
+    color: #86efac;
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+/* ==================== 9. ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    33% {
+        transform: translateY(-20px) translateX(10px);
+    }
+
+    66% {
+        transform: translateY(10px) translateX(-10px);
+    }
+}
+
+@keyframes float-slow-reverse {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    33% {
+        transform: translateY(15px) translateX(-15px);
+    }
+
+    66% {
+        transform: translateY(-10px) translateX(10px);
+    }
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-float-slow {
+    animation: float-slow 15s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+    animation: float-slow-reverse 18s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 6s ease infinite;
+}
+
+/* ==================== 10. LOADING STEPS ==================== */
+.loading-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #334155;
+    letter-spacing: 0.05em;
+    transition: all 0.5s ease;
+}
+
+.loading-step.active {
+    color: #818cf8;
+}
+
+.loading-step.active .step-dot {
+    background: #818cf8;
+    box-shadow: 0 0 8px rgba(129, 140, 248, 0.5);
+    animation: pulse-slow 1.5s infinite;
+}
+
+.loading-step.done {
+    color: #4ade80;
+}
+
+.loading-step.done .step-dot {
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+
+/* ==================== 11. PROCESS BUTTON GLOW ==================== */
+.process-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.process-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.1), transparent 30%);
+    animation: rotate-glow 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.process-btn:hover::after {
+    opacity: 1;
+}
+
+@keyframes rotate-glow {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==================== 12. DRAG & DROP ==================== */
+#dropOverlay {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==================== 13. SIDEBAR TRANSITION ==================== */
+#mainSidebar {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* ==================== 14. HISTORY CARD HOVER ==================== */
+.history-card {
+    transition: all 0.2s ease;
+}
+
+.history-card:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    transform: translateX(3px);
+}
+
+/* ==================== 15. SELECTION ==================== */
+::selection {
+    background: rgba(99, 102, 241, 0.3);
+    color: #e2e8f0;
+}
+
+/* ==================== 16. TEXTAREA FOCUS ==================== */
+#dataInput:focus {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+/* ==================== 17. STAT CARDS ==================== */
+.stat-card {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+    background: rgba(30, 41, 59, 0.7);
+}
