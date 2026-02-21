@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DK2B | Intelligence Engine</title>
+    <meta name="description"
+        content="AI-powered BRD analysis engine that extracts requirements, detects conflicts, and generates system architecture diagrams from Business Requirements Documents.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/panzoom@9.4.0/dist/panzoom.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body class="text-slate-300 min-h-screen flex flex-col selection:bg-indigo-500/30 overflow-x-hidden">
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <canvas id="particleCanvas" class="absolute inset-0 w-full h-full"></canvas>
+        <div
+            class="absolute top-[-30%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/8 rounded-full blur-[120px] animate-float-slow">
+        </div>
+        <div
+            class="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-600/8 rounded-full blur-[100px] animate-float-slow-reverse">
+        </div>
+        <div
+            class="absolute top-[40%] left-[50%] w-[300px] h-[300px] bg-cyan-500/5 rounded-full blur-[80px] animate-pulse-slow">
+        </div>
+    </div>
+
+    <div class="relative z-10 max-w-[1600px] w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-8 flex-1">
+
+        <div class="lg:hidden p-5 rounded-2xl glass-strong flex justify-between items-center sticky top-2 z-50 mx-2">
+    <div class="flex items-center gap-3">
+        <img 
+            src="https://github.com/Kwings-official/Data/blob/main/Assets/Images/DK2B.png?raw=true" 
+            alt="DK2B Logo" 
+            class="w-10 h-10 rounded-full shadow-lg shadow-indigo-500/20" 
+            onerror="this.src='https://ui-avatars.com/api/?name=DK2B&background=4c1d95&color=fff';">
+        <div>
+            <h1 class="text-xl font-black gradient-text-animated tracking-tight">DK2B</h1>
+            <p class="text-[8px] text-indigo-400/80 font-bold uppercase tracking-[0.25em]">Intelligence Engine</p>
+        </div>
+    </div>
+    <button id="mobileMenuBtn" class="p-2.5 glass rounded-xl text-slate-400 hover:text-white transition-all">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+</div>
+
+        <aside id="mainSidebar"
+            class="hidden lg:flex w-full lg:w-[280px] flex-col gap-5 transition-all duration-500 flex-shrink-0">
+
+            <div class="glass-strong rounded-2xl p-7 relative overflow-hidden group">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+    <div class="relative z-10">
+        <div class="flex items-center gap-3">
+            <img 
+                src="https://github.com/Kwings-official/Data/blob/main/Assets/Images/DK2B.png?raw=true" 
+                alt="DK2B Logo" 
+                class="w-12 h-12 rounded-full shadow-lg shadow-indigo-500/25 border-2 border-indigo-500/20" 
+                onerror="this.src='https://ui-avatars.com/api/?name=DK2B&background=4c1d95&color=fff';">
+            <div>
+                <h1 class="text-2xl font-black gradient-text-animated tracking-tight leading-none">DK2B</h1>
+                <p class="text-[8px] text-indigo-400/70 font-bold uppercase tracking-[0.25em] mt-0.5">Intelligence Engine</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 mt-5 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+            <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-sm shadow-emerald-400/50"></div>
+            <span class="text-[9px] text-emerald-400 font-bold uppercase tracking-[0.2em]">Gemini AI Online</span>
+        </div>
+    </div>
+</div>
+
+            <div class="glass rounded-2xl p-5">
+                <h4 class="text-[9px] font-black text-slate-600 uppercase tracking-[0.2em] mb-3">Powered By</h4>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="tech-badge">Gemini 2.5</span>
+                    <span class="tech-badge">LangChain</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">Mermaid.js</span>
+                    <span class="tech-badge">Panzoom</span>
+                </div>
+            </div>
+
+            <div class="flex-1 glass rounded-2xl p-5 flex flex-col overflow-hidden min-h-[200px] lg:min-h-0">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-[9px] font-black text-slate-500 uppercase tracking-[0.2em]">Recent Sessions</h3>
+                    <button onclick="clearHistory()"
+                        class="text-slate-600 hover:text-rose-400 transition-all p-1.5 hover:bg-rose-500/10 rounded-lg group"
+                        title="Clear All">
+                        <i data-lucide="trash-2" class="w-3 h-3 group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
+                <div id="historyList" class="flex-1 overflow-y-auto custom-scrollbar space-y-1.5 pr-1"></div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col gap-5 min-w-0">
+
+            <div class="glass rounded-2xl p-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+                    <div class="flex items-center gap-2.5 bg-slate-900/60 px-3.5 py-2 rounded-xl border border-white/5">
+                        <i data-lucide="shield-check" class="w-3 h-3 text-slate-500"></i>
+                        <span class="text-[9px] font-bold uppercase tracking-[0.15em] text-slate-500">Auditor</span>
+                        <div class="relative inline-block w-8 h-4 align-middle select-none">
+                            <input type="checkbox" name="toggle" id="auditorToggle"
+                                class="toggle-checkbox absolute block w-4 h-4 rounded-full bg-white border-4 appearance-none cursor-pointer transition-all duration-300 left-0" />
+                            <label for="auditorToggle"
+                                class="toggle-label block overflow-hidden h-4 rounded-full bg-slate-700 cursor-pointer"></label>
+                        </div>
+                    </div>
+
+                    <div id="charCounter"
+                        class="hidden sm:flex items-center gap-1.5 text-[9px] text-slate-600 font-mono">
+                        <i data-lucide="type" class="w-3 h-3"></i>
+                        <span id="charCount">0</span> chars
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button onclick="newSession()"
+                        class="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-4 py-2 glass hover:bg-white/10 text-slate-500 hover:text-white rounded-xl text-[9px] font-bold uppercase tracking-[0.15em] transition-all hover:scale-[1.02] active:scale-[0.98]">
+                        <i data-lucide="plus" class="w-3 h-3"></i> New
+                    </button>
+                    <button id="downloadBtn"
+                        class="hidden flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-indigo-500/15 to-purple-500/15 border border-indigo-500/20 hover:from-indigo-500/25 hover:to-purple-500/25 text-indigo-300 rounded-xl text-[9px] font-bold uppercase tracking-[0.15em] transition-all hover:scale-[1.02] active:scale-[0.98]">
+                        <i data-lucide="download" class="w-3 h-3"></i> Export PDF
+                    </button>
+                </div>
+            </div>
+
+            <section id="inputSection" class="glass-strong rounded-2xl flex flex-col relative group overflow-hidden">
+                <div
+                    class="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent">
+                </div>
+
+                <div class="relative flex flex-col h-56 lg:h-[300px]">
+                    <textarea id="dataInput"
+                        class="flex-1 bg-transparent p-6 lg:p-7 text-sm leading-relaxed focus:outline-none placeholder:text-slate-700 resize-none z-10 font-mono"
+                        placeholder="// Paste your BRD (Business Requirements Document) here...&#10;// Example: The system shall provide user authentication with OAuth2, an admin dashboard with RBAC, and PostgreSQL database integration&#10;// Or drag & drop a PDF / CSV data file below ↓"></textarea>
+
+                    <div id="dropOverlay"
+                        class="absolute inset-0 bg-gradient-to-br from-indigo-900/95 to-purple-900/95 rounded-2xl flex items-center justify-center hidden z-20 backdrop-blur-xl transition-all">
+                        <div class="text-center">
+                            <div
+                                class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/10 flex items-center justify-center border-2 border-dashed border-white/30 animate-bounce">
+                                <i data-lucide="upload-cloud" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <p class="text-xl font-bold text-white">Drop File to Analyze</p>
+                            <p class="text-xs text-indigo-200/60 mt-1">Supports .pdf, .csv, and .txt files</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="p-4 flex flex-col sm:flex-row justify-between items-center bg-slate-950/40 border-t border-white/[0.03] z-10 gap-3">
+                    <div class="flex items-center gap-3 w-full sm:w-auto overflow-hidden">
+                        <button id="uploadTrigger"
+                            class="flex items-center gap-2 text-[9px] font-bold text-indigo-300 bg-indigo-500/10 px-3 py-1.5 rounded-lg border border-indigo-500/15 hover:bg-indigo-500/20 transition-all hover:scale-[1.03] active:scale-[0.97]">
+                            <i data-lucide="paperclip" class="w-3 h-3"></i> Upload Data
+                        </button>
+                        <span id="fileName"
+                            class="text-[9px] text-emerald-400/80 font-bold truncate max-w-[180px] flex items-center gap-1"></span>
+                    </div>
+
+                    <button id="processBtn"
+                        class="w-full sm:w-auto process-btn px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-xl shadow-indigo-500/25 transition-all uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.97] hover:shadow-indigo-500/40">
+                        <i data-lucide="zap" class="w-4 h-4"></i> Run Intelligence
+                    </button>
+                </div>
+                <input type="file" id="fileInput" class="hidden" accept=".pdf,.txt,.csv">
+            </section>
+
+            <div id="loadingState" class="hidden">
+                <div
+                    class="glass-strong rounded-2xl p-12 flex flex-col items-center justify-center relative overflow-hidden min-h-[350px]">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 animate-gradient">
+                    </div>
+
+                    <div class="relative mb-8">
+                        <div class="w-24 h-24 border-4 border-slate-800 rounded-full"></div>
+                        <div class="w-24 h-24 border-4 border-transparent border-t-indigo-500 border-r-purple-500 rounded-full animate-spin absolute top-0 left-0"
+                            style="animation-duration:1.2s"></div>
+                        <div class="w-16 h-16 border-4 border-transparent border-b-cyan-400 rounded-full animate-spin absolute top-4 left-4"
+                            style="animation-duration:1.8s;animation-direction:reverse"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="brain" class="w-6 h-6 text-indigo-400 animate-pulse"></i>
+                        </div>
+                    </div>
+
+                    <div class="text-center w-full max-w-md mx-auto mt-6">
+                        <p id="funLoadingText" class="text-sm font-bold tracking-[0.1em] uppercase gradient-text-animated mb-6 h-5 transition-all duration-300">
+                            Waking up the AI Engine...
+                        </p>
+
+                        <div class="w-full bg-slate-900/80 rounded-full h-3 mb-3 overflow-hidden border border-white/5 shadow-inner">
+                            <div id="realProgressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 h-3 rounded-full transition-all duration-500 ease-out w-0 relative">
+                                <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center px-1">
+                            <p id="backendStatusText" class="text-[10px] text-indigo-300 font-mono text-left animate-pulse">Establishing secure connection...</p>
+                            <p id="progressPercent" class="text-[10px] text-slate-500 font-mono font-bold">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="resultSection" class="hidden space-y-5 pb-10">
+
+                <div class="grid grid-cols-3 gap-3">
+                    <div onclick="scrollToSection('reqPanel')"
+                        class="stat-card glass rounded-xl p-4 text-center group hover:border-indigo-500/20 transition-all cursor-pointer hover:scale-[1.03] active:scale-[0.97]">
+                        <div class="text-2xl font-black gradient-text-animated" id="reqCount">0</div>
+                        <div class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em] mt-1">Requirements
+                        </div>
+                        <div
+                            class="text-[7px] text-indigo-400/40 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Click to view ↓</div>
+                    </div>
+                    <div onclick="scrollToSection('archPanel')"
+                        class="stat-card glass rounded-xl p-4 text-center group hover:border-emerald-500/20 transition-all cursor-pointer hover:scale-[1.03] active:scale-[0.97]">
+                        <div class="text-2xl font-black text-emerald-400" id="nodeCount">0</div>
+                        <div class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em] mt-1">Arch Nodes
+                        </div>
+                        <div
+                            class="text-[7px] text-emerald-400/40 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Click to view ↓</div>
+                    </div>
+                    <div onclick="scrollToSection('conflictPanel')"
+                        class="stat-card glass rounded-xl p-4 text-center group hover:border-rose-500/20 transition-all cursor-pointer hover:scale-[1.03] active:scale-[0.97]">
+                        <div class="text-2xl font-black text-rose-400" id="conflictCount">0</div>
+                        <div class="text-[8px] font-bold text-slate-600 uppercase tracking-[0.2em] mt-1">Conflicts</div>
+                        <div
+                            class="text-[7px] text-rose-400/40 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Click to view ↓</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
+
+                    <div id="reqPanel" class="glass-strong rounded-2xl p-6 lg:p-7 overflow-hidden relative">
+                        <div
+                            class="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent">
+                        </div>
+                        <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-5 flex items-center gap-2"
+                            title="Requirements extracted from the BRD">
+                            <div class="w-5 h-5 rounded-md bg-indigo-500/15 flex items-center justify-center"><i
+                                    data-lucide="list-checks" class="w-3 h-3 text-indigo-400"></i></div>
+                            BRD Requirements Extracted
+                        </h3>
+                        <div id="requirementsList"
+                            class="space-y-2.5 overflow-y-auto custom-scrollbar max-h-[450px] pr-1"></div>
+                    </div>
+
+                    <div class="flex flex-col gap-5">
+
+                        <div id="archPanel" class="glass-strong rounded-2xl p-6 lg:p-7 relative overflow-hidden">
+                            <div
+                                class="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-purple-500/30 to-transparent">
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3
+                                    class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                                    <div class="w-5 h-5 rounded-md bg-purple-500/15 flex items-center justify-center"><i
+                                            data-lucide="workflow" class="w-3 h-3 text-purple-400"></i></div>
+                                    BRD System Architecture
+                                </h3>
+                                <div class="flex items-center gap-1.5 text-[8px] text-slate-700">
+                                    <i data-lucide="mouse" class="w-2.5 h-2.5"></i> scroll to zoom
+                                    <span class="text-slate-800">·</span>
+                                    <i data-lucide="move" class="w-2.5 h-2.5"></i> drag to pan
+                                </div>
+                            </div>
+                            <div id="architectureContainer"
+                                class="flex items-center justify-center overflow-hidden custom-scrollbar bg-slate-950/50 rounded-xl p-4 w-full cursor-move min-h-[280px] border border-white/[0.03]">
+                                <div id="architectureDiagram" class="mermaid w-full flex justify-center"></div>
+                            </div>
+                        </div>
+
+                        <div id="auditorSection" data-panel="conflictPanel"
+                            class="glass rounded-2xl p-6 lg:p-7 border-rose-500/10 bg-rose-500/[0.02] relative overflow-hidden">
+                            <div
+                                class="absolute top-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-rose-500/30 to-transparent">
+                            </div>
+                            <h3
+                                class="text-[10px] font-black text-rose-400/80 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                                <div class="w-5 h-5 rounded-md bg-rose-500/15 flex items-center justify-center"><i
+                                        data-lucide="alert-triangle" class="w-3 h-3 text-rose-400"></i></div>
+                                Auditor Redlines
+                            </h3>
+                            <div id="conflictsList" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="relative z-10 text-center py-6 text-[9px] text-slate-700 font-medium tracking-wide">
+        Built with <span class="text-indigo-500">Gemini AI</span> · <span class="text-slate-600">LangChain</span> ·
+        <span class="text-slate-600">FastAPI</span>
+    </footer>
+
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
