@@ -161,6 +161,6 @@ o file (File Upload, Optional) - PDF or CSV document.
 
 ---
 <p align="center">
-  <b>[Powered By The27LINKS](mailto:support@the27links.in) </b> <br>
+  <b>Powered By The27LINKS </b> <br>
   <i>Project Created By : Burner Bros</i> 
 </p>
