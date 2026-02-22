@@ -150,7 +150,17 @@ o file (File Upload, Optional) - PDF or CSV document.
 - **Containerization:** Create a Dockerfile and docker-compose.yml to bundle the FastAPI
     backend and a static file server for the UI, making local testing and deployment
     entirely reproducible.
+## 👥 Team Members
 
-## DocumentatIon Writtten By :
+| Name | Role |
+| :--- | :--- |
+| **Divya Raj** | [cite_start]Frontend Developer [cite: 1, 22] |
+| ** Pt. Sumit Kumar Sharma** | [cite_start]Backend Architech & Documentation Author  |
+| **Harikesh Singh** | [cite_start]Data Engineer [cite: 1, 22] |
+| **Teena Parmar** | [cite_start]Pitch Lead & Presenter [cite: 1, 22] |
 
-## Sumit Kumar Sharma
+---
+<p align="center">
+  [cite_start]<b>Powered By The27LINKS</b> [cite: 1, 22, 46, 72]<br>
+  [cite_start]<i>Project Created By : Burner Bros</i> [cite: 83, 84]
+</p>
