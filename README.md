@@ -152,12 +152,12 @@ o file (File Upload, Optional) - PDF or CSV document.
     entirely reproducible.
 ## 👥 Team Members
 
-| Name | Role |
-| :--- | :--- |
-| **Divya Raj** | Frontend Developer |
-| **Pt. Sumit Kumar Sharma** | Backend Architech & Documentation Author  |
-| **Harikesh Singh** | Data Engineer  |
-| **Teena Parmar** | Pitch Lead & Presenter  |
+| S.No. | Name | Role |
+| :--- | :--- | :--- |
+| **1.** || **Divya Raj** | Frontend Developer |
+| **2.** || **Pt. Sumit Kumar Sharma** | Backend Architech & Documentation Author  |
+| **3.** || **Harikesh Singh** | Data Engineer  |
+| **4.** || **Teena Parmar** | Pitch Lead & Presenter  |
 
 ---
 <p align="center">
