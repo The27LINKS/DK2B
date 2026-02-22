@@ -152,15 +152,15 @@ o file (File Upload, Optional) - PDF or CSV document.
     entirely reproducible.
 ## 👥 Team Members
 
-| S.No. | Name | Role |
-| :--- | :--- | :--- |
-| **1.** | **Divya Raj** | Frontend Developer |
-| **2.** | **Pt. Sumit Kumar Sharma** | Backend Architech & Documentation Author  |
-| **3.** | **Harikesh Singh** | Data Engineer  |
-| **4.** | **Teena Parmar** | Pitch Lead & Presenter  |
+| S.No. | Name | Role | Contact |
+| :--- | :--- | :--- | :--- |
+| **1.** | **Divya Raj** | Frontend Developer |[Send Email](mailto:rajdivya6533@gmail.com) |
+| **2.** | **Pt. Sumit Kumar Sharma** | Backend Architech & Documentation Author  |[Send Email](mailto:sumittkumarr1729@gmail.com) |
+| **3.** | **Harikesh Singh** | Data Engineer  |[Send Email](mailto:admin@blockdoc.in) |
+| **4.** | **Teena Parmar** | Pitch Lead & Presenter  |[Send Email](mailto:teenaparmar124@gmail.com) |
 
 ---
 <p align="center">
-  <b>Powered By The27LINKS</b> <br>
+  <b>[Powered By The27LINKS](mailto:support@the27links.in) </b> <br>
   <i>Project Created By : Burner Bros</i> 
 </p>
